@@ -1,0 +1,45 @@
+{
+  "name": "@aba1on1/backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Abstract ABA backend \u2014 MongoDB/Mongoose MERN rewrite of the Phase 1 foundation",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "ensure-env": "node -e \"const fs=require('fs');fs.existsSync('.env')||(fs.existsSync('.env.example')?fs.copyFileSync('.env.example','.env'):fs.writeFileSync('.env','NODE_ENV=development\\n'));console.log('.env ready')\"",
+    "prestart": "npm run ensure-env",
+    "start": "node --env-file=.env src/server.js",
+    "predev": "npm run ensure-env",
+    "dev": "node --env-file=.env --watch src/server.js",
+    "test": "node --test test/*.test.js",
+    "preverify:isolation": "npm run ensure-env",
+    "verify:isolation": "node --env-file=.env scripts/verify-isolation.mjs",
+    "preseed:operator": "npm run ensure-env",
+    "seed:operator": "node --env-file=.env scripts/seed-operator.mjs",
+    "prediagnose:409": "npm run ensure-env",
+    "diagnose:409": "node --env-file=.env scripts/diagnose-org-409.mjs",
+    "prefix:indexes": "npm run ensure-env",
+    "fix:indexes": "node --env-file=.env scripts/fix-indexes.mjs",
+    "preseed:demo": "npm run ensure-env",
+    "seed:demo": "node scripts/seed-demo.js",
+    "audit:seed": "node scripts/audit-seed.mjs"
+  },
+  "dependencies": {
+    "@aba1on1/schemas": "*",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.0",
+    "resend": "^6.20.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^11.2.0"
+  }
+}

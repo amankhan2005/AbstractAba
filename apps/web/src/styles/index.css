@@ -1,0 +1,278 @@
+/*
+ * Styles for features added after the original design system was written:
+ * insurance, guardian invitations, care-team assignment and company branding.
+ *
+ * Kept separate from global.css so the original stylesheet stays reviewable,
+ * and imported from main.jsx AFTER it so these rules can build on the design
+ * tokens (--color-*, --space-*, --radius-*) that global.css defines.
+ */
+
+/* --- Insurance panel (blueprint 6.2 / 6.9) ------------------------------- */
+.ins-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-4); flex-wrap: wrap; }
+.ins-title { margin: 0 0 var(--space-2); }
+.ins-reason { margin: var(--space-2) 0 0; color: var(--color-text-muted); max-width: 60ch; }
+.ins-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-3); margin-top: var(--space-4); }
+.ins-form__actions { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: var(--space-2); }
+.ins-field { display: flex; flex-direction: column; gap: var(--space-1); font-size: 0.875rem; }
+.ins-field > span { color: var(--color-text-muted); }
+.ins-field input, .ins-field select {
+  padding: var(--space-2); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text);
+  font: inherit; min-height: 44px; /* touch target — RBTs use this in the field */
+}
+.ins-list { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: grid; gap: var(--space-3); }
+.ins-item {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: var(--space-4); flex-wrap: wrap;
+  padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+}
+.ins-item__plan { color: var(--color-text-muted); }
+.ins-item__meta { color: var(--color-text-muted); font-size: 0.875rem; margin-top: var(--space-1); }
+.ins-item__problem { color: var(--color-state-danger, #b42318); font-size: 0.875rem; margin: var(--space-2) 0 0; }
+.ins-item__side { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+@media (max-width: 640px) {
+  .ins-item, .ins-head { flex-direction: column; align-items: stretch; }
+  .ins-form { grid-template-columns: 1fr; }
+}
+
+/* --- Anonymous guardian page (blueprint 2.6 / 6.2) ----------------------- */
+/* Standalone: no shell, no navigation. Deliberately light and plain — a family
+   opening a link from an email needs to recognise it as legitimate, not to
+   admire it. */
+.guardian {
+  min-height: 100vh; display: flex; align-items: flex-start; justify-content: center;
+  padding: var(--space-6) var(--space-4); background: var(--color-bg-subtle, #f6f7fb);
+}
+.guardian__card {
+  width: 100%; max-width: 520px; background: var(--color-surface, #fff);
+  border-radius: var(--radius-lg, 12px); padding: var(--space-6);
+  box-shadow: 0 1px 3px rgb(16 24 40 / 10%);
+}
+.guardian__org { margin: 0 0 var(--space-4); font-weight: 600; color: var(--color-text-muted); }
+.guardian__title { margin: 0 0 var(--space-3); font-size: 1.5rem; line-height: 1.3; }
+.guardian__body { margin: 0 0 var(--space-5); line-height: 1.6; color: var(--color-text); }
+.guardian__muted { color: var(--color-text-muted); }
+.guardian__error {
+  margin: 0 0 var(--space-4); padding: var(--space-3);
+  border-radius: var(--radius-md); background: #fef3f2; color: #b42318;
+}
+.guardian__form { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.guardian__field { display: flex; flex-direction: column; gap: var(--space-1); }
+.guardian__field--wide { grid-column: 1 / -1; }
+.guardian__field > span { font-size: 0.875rem; color: var(--color-text-muted); }
+.guardian__field input {
+  padding: var(--space-3); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); font: inherit; min-height: 48px;
+}
+.guardian__actions { grid-column: 1 / -1; display: flex; flex-direction: column; gap: var(--space-2); }
+.guardian__submit {
+  min-height: 48px; padding: 0 var(--space-5); border: none;
+  border-radius: var(--radius-md); background: var(--color-brand-primary, #1172a3);
+  color: #fff; font: inherit; font-weight: 600; cursor: pointer;
+}
+.guardian__submit:disabled { opacity: 0.55; cursor: not-allowed; }
+.guardian__hint { margin: 0; font-size: 0.875rem; color: var(--color-text-muted); }
+/* Families overwhelmingly open these links on a phone. */
+@media (max-width: 560px) {
+  .guardian { padding: var(--space-3); align-items: stretch; }
+  .guardian__card { padding: var(--space-4); }
+  .guardian__form { grid-template-columns: 1fr; }
+}
+
+/* --- Guardian information requests --------------------------------------- */
+.guardian-invite { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+.guardian-invite__error { font-size: 0.8125rem; color: var(--color-state-danger, #b42318); }
+
+/* --- Session lifecycle panel (blueprint Figure 6.2) ---------------------- */
+.lifecycle__head { display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+.lifecycle__help { margin: var(--space-2) 0 0; color: var(--color-text-muted); max-width: 52ch; }
+.lifecycle__times { display: flex; gap: var(--space-5); margin: 0; flex-wrap: wrap; }
+.lifecycle__times dt { font-size: 0.8125rem; color: var(--color-text-muted); }
+.lifecycle__times dd { margin: var(--space-1) 0 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+.lifecycle__returned {
+  margin-top: var(--space-4); padding: var(--space-3);
+  border-left: 3px solid var(--color-state-warning, #dc6803);
+  background: #fffaeb; border-radius: var(--radius-md);
+}
+.lifecycle__returned p { margin: var(--space-2) 0 0; }
+.lifecycle__signatures {
+  display: flex; align-items: center; gap: var(--space-2);
+  margin-top: var(--space-4); flex-wrap: wrap;
+}
+.lifecycle__sig-label { font-size: 0.875rem; color: var(--color-text-muted); }
+.lifecycle__actions { display: flex; gap: var(--space-2); margin-top: var(--space-4); flex-wrap: wrap; }
+.lifecycle__hint { margin: var(--space-2) 0 0; font-size: 0.875rem; color: var(--color-text-muted); }
+.lifecycle__field { display: flex; flex-direction: column; gap: var(--space-1); margin-top: var(--space-3); }
+.lifecycle__field > span { font-size: 0.875rem; color: var(--color-text-muted); }
+.lifecycle__field select, .lifecycle__field textarea {
+  padding: var(--space-2); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); font: inherit; min-height: 44px;
+  background: var(--color-surface); color: var(--color-text);
+}
+/* Technicians run sessions on a phone, one-handed, in a family's home. */
+@media (max-width: 640px) {
+  .lifecycle__head { flex-direction: column; }
+  .lifecycle__actions { flex-direction: column; }
+  .lifecycle__actions > * { width: 100%; min-height: 48px; }
+}
+
+/* --- Company branding (blueprint 6.14) ----------------------------------- */
+.brand-logo { display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap; margin-top: var(--space-3); }
+.brand-logo__preview {
+  width: 160px; height: 80px; display: flex; align-items: center; justify-content: center;
+  border: 1px dashed var(--color-border); border-radius: var(--radius-md);
+  background: var(--color-surface); overflow: hidden;
+}
+.brand-logo__preview img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.brand-logo__actions { display: flex; flex-direction: column; gap: var(--space-1); }
+.brand-logo__button { cursor: pointer; }
+.brand-hint { font-size: 0.8125rem; margin: 0; }
+.brand-colors { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4); margin-top: var(--space-3); }
+.brand-field { display: flex; flex-direction: column; gap: var(--space-1); }
+.brand-field__row { display: flex; gap: var(--space-2); align-items: center; }
+.brand-field__row input[type="color"] { width: 48px; height: 44px; padding: 2px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: none; }
+.brand-field__row input[type="text"] { flex: 1; min-height: 44px; padding: var(--space-2); border: 1px solid var(--color-border); border-radius: var(--radius-md); font: inherit; }
+.brand-preview { display: flex; gap: var(--space-2); align-items: center; flex-wrap: wrap; margin: var(--space-4) 0 var(--space-2); }
+.brand-preview__label { color: var(--color-text-muted); font-size: 0.875rem; }
+.brand-preview__chip { padding: var(--space-1) var(--space-3); border-radius: 999px; color: #fff; font-size: 0.8125rem; }
+.brand-preview__chip--locked { color: inherit; }
+@media (max-width: 640px) {
+  .brand-logo { flex-direction: column; align-items: stretch; }
+  .brand-logo__preview { width: 100%; }
+}
+
+/* --- Session submission blockers (blueprint 6.6) ------------------------- */
+/* Every completeness problem at once — one at a time means submit, fix,
+   resubmit, discover the next, at the end of a home visit. */
+.lifecycle__blockers {
+  margin: var(--space-3) 0; padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md); border-left: 4px solid var(--color-state-warning, #b54708);
+  background: var(--color-state-warning-subtle, #fffaeb);
+}
+.lifecycle__blockers-title { margin: 0 0 var(--space-2); font-weight: 600; }
+.lifecycle__blockers ul { margin: 0; padding-left: var(--space-5); }
+.lifecycle__blockers li { margin-bottom: var(--space-1); line-height: 1.5; }
+
+
+/* ========================================================================
+ * BRAND PALETTE APPLIED — soft tints from the client palette.
+ *
+ * These are DECORATIVE surfaces only. None is wired to a status: the semantic
+ * palette (approved / pending / denied / information / draft) stays locked by
+ * BR-UI-2, so pale red and pale green here never mean "denied" or "approved".
+ * Every tint carries near-black text and clears WCAG AA by a wide margin.
+ * ===================================================================== */
+
+/* The insurance panel header sits on a faint lilac wash. */
+.ins-head { background: var(--surface-tint); margin: calc(-1 * var(--space-4)) calc(-1 * var(--space-4)) var(--space-4); padding: var(--space-4); border-radius: var(--radius) var(--radius) 0 0; }
+:root[data-scheme='dark'] .ins-head { color: var(--surface-tint-ink); }
+
+/* Guardian page: lilac card frame so the family sees a warm, branded page. */
+.guardian { background: var(--surface-tint); }
+.guardian__card { border-top: 4px solid var(--color-brand-primary); }
+
+/* Care-team + guardian request badges pick up the periwinkle/mint/blush band
+   through the shared badge tones already defined in global.css; the branding
+   preview chips show the palette directly. */
+.brand-preview__chip--locked.ui-badge--success { background: var(--surface-mint); color: #12331a; }
+.brand-preview__chip--locked.ui-badge--danger { background: var(--surface-blush); color: #5b1a1a; }
+
+/* Dashboard metric cards get a subtle top accent in the brand mauve. */
+.metric-card, .dashboard-card { border-top: 3px solid var(--color-brand-primary); }
+
+/* The submission blockers panel already uses a warning tint; leave it — it is
+   a genuine warning surface, and recolouring it into the brand would blur the
+   line between decoration and meaning. */
+
+/* ========================================================================
+ * WORKSPACE SHELL — the four role experiences share these mechanics; the
+ * sidebar CONTENT (sections, labels, workspace name) is what differs per role.
+ *
+ * Visual direction per the brief: lavender sidebar, white sidebar text, white
+ * workspace, dark body text. The sidebar uses the brand mauve as a solid
+ * ground with white text (that pairing clears AA: #A47DAB vs white is 3.44:1
+ * for normal text — so sidebar labels use a DEEPER mauve ground, #6C4F71, which
+ * reaches 5.6:1 with white and reads as the same family).
+ * ===================================================================== */
+.ws { display: grid; grid-template-columns: 264px 1fr; min-height: 100vh; background: var(--color-bg); color: var(--color-fg); }
+
+.ws__sidebar {
+  display: flex; flex-direction: column; gap: var(--space-5);
+  padding: var(--space-5) var(--space-4);
+  background: var(--brand-rail);
+  color: #ffffff;
+}
+.ws__brand { display: flex; flex-direction: column; gap: 2px; padding: 0 var(--space-2); }
+.ws__brand-mark { font-weight: 720; letter-spacing: -0.02em; font-size: 1.1rem; color: #ffffff; }
+.ws__brand-workspace { font-size: 0.8rem; color: rgba(255, 255, 255, 0.78); }
+
+.ws-nav { display: flex; flex-direction: column; gap: var(--space-4); }
+.ws-nav__section { display: flex; flex-direction: column; gap: 2px; }
+.ws-nav__heading {
+  margin: 0 0 var(--space-1); padding: 0 var(--space-2);
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+.ws-navlink {
+  display: block; padding: var(--space-2) var(--space-3);
+  border-radius: 10px; color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.925rem;
+  transition: background 120ms ease, color 120ms ease;
+}
+.ws-navlink:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; }
+.ws-navlink--active { background: #ffffff; color: var(--brand-primary-strong); font-weight: 620; }
+.ws-navlink:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(255,255,255,0.7); }
+
+.ws__main { display: flex; flex-direction: column; min-width: 0; }
+.ws__header {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--color-border); background: var(--color-surface);
+}
+.ws__menu-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--color-fg); padding: var(--space-1) var(--space-2); border-radius: 8px; }
+.ws__menu-btn:hover { background: color-mix(in srgb, var(--color-fg) 6%, transparent); }
+.ws__scope { color: var(--color-muted); font-size: 0.9rem; font-weight: 600; }
+.ws__identity { margin-left: auto; display: flex; align-items: center; gap: var(--space-3); }
+.ws__avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--color-brand-primary); color: #ffffff; font-weight: 700; font-size: 0.8rem;
+}
+.ws__content { padding: var(--space-6) var(--space-5); max-width: 1280px; width: 100%; }
+
+/* Mobile drawer */
+.ws__scrim { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 40; }
+.ws__drawer {
+  position: fixed; inset: 0 auto 0 0; width: 264px; z-index: 50;
+  display: flex; flex-direction: column; gap: var(--space-5);
+  padding: var(--space-5) var(--space-4);
+  background: var(--brand-rail); color: #fff;
+  overflow-y: auto;
+}
+
+@media (max-width: 900px) {
+  .ws { grid-template-columns: 1fr; }
+  .ws__sidebar { display: none; }
+  .ws__menu-btn { display: inline-flex; }
+  .ws__content { padding: var(--space-4); }
+  .ws__whoami { display: none; }
+}
+
+/* --- Dashboard presentation (all four role boards) ----------------------- */
+.dash-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-5); flex-wrap: wrap; }
+.dash-header__title { margin: 0; font-size: 1.6rem; letter-spacing: -0.01em; }
+.dash-header__subtitle { margin: var(--space-1) 0 0; color: var(--color-muted); max-width: 60ch; }
+.dash-header__actions { display: flex; gap: var(--space-2); }
+.dash-section-heading { margin: var(--space-6) 0 var(--space-2); }
+
+.metric-card__title { margin: 0 0 var(--space-4); font-size: 1.05rem; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-4); }
+.metric {
+  display: flex; flex-direction: column; gap: 0.2rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 12px; background: var(--surface-tint);
+  border-left: 3px solid var(--color-brand-primary);
+}
+.metric__label { font-size: 0.8rem; color: var(--color-muted); }
+.metric__value { font-size: 1.75rem; line-height: 1.1; font-weight: 700; color: var(--color-fg); }
+.metric__hint { font-size: 0.78rem; color: var(--color-muted); }
+:root[data-scheme='dark'] .metric { color: var(--surface-tint-ink); }

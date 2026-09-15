@@ -1,0 +1,12 @@
+{
+  "name": "aba1on1-mern",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Abstract ABA Phase 1 — MERN migration (multi-tenant ABA practice-management platform)",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "test": "npm test --workspace apps/api && npm test --workspace apps/web && npm test --workspace apps/console && npm test --workspace apps/website",
+    "build": "npm run build --workspace apps/web && npm run build --workspace apps/console && npm run build --workspace apps/website"
+  },
+  "engines": { "node": ">=20" }
+}

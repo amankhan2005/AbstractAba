@@ -1,0 +1,15 @@
+{
+  "name": "@aba1on1/date-picker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Abstract ABA shared date picker (Calendar, DatePicker, DateRangePicker) used by the tenant web app and the platform console",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Abstract ABA · Platform Console</title>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <!-- Shared appearance bootstrap: applies the same scheme/accent tokens the
+         tenant app uses, before first paint, so the console matches the product. -->
+    <script>
+      (function applyStoredTheme() {
+        try {
+          var stored = window.localStorage.getItem('aba1on1.appearance');
+          var pref = stored ? JSON.parse(stored) : {};
+          var scheme = pref.colorScheme || 'auto';
+          var resolved = scheme === 'auto'
+            ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+            : scheme;
+          var root = document.documentElement;
+          root.dataset.scheme = 'light'; // pinned: UI always renders the white-panel scheme
+          root.dataset.accent = pref.accent || 'lavender';
+          root.dataset.density = pref.density || 'comfortable';
+          root.dataset.radius = pref.radius || 'rounded';
+          root.dataset.fontSize = pref.fontSize || 'medium';
+          root.dataset.contrast = pref.highContrast ? 'high' : 'normal';
+          root.dataset.motion = pref.reducedMotion ? 'reduced' : 'full';
+        } catch (error) {
+          document.documentElement.dataset.scheme = 'light';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+/*
+ * Abstract ABA — brand colour tokens.
+ *
+ * The ONE source of the product's visual identity, imported by both front ends
+ * (tenant web app and platform console) and mirrored in PLATFORM_BRAND.colors
+ * for JavaScript consumers (charts, emails). Each app maps its own design-system
+ * variables (--rx-accent, sidebar rails, heroes, focus rings) onto these tokens.
+ *
+ *   Primary   #1172A3  interactive colour: buttons, links, active navigation,
+ *                      focus — white text on it clears WCAG AA (5.4:1).
+ *   Secondary #2DA589  supporting colour: gradients, indicators, highlights and
+ *                      icons. Not used as a text/button ground for white text
+ *                      (2.9:1); the -strong shade is used where text sits on it.
+ *
+ * Semantic status colours (success, warning, error) are NOT defined here and
+ * are never recoloured by the brand.
+ */
+:root {
+  --brand-primary: #1172A3;
+  --brand-primary-strong: #0D5E87;
+  --brand-primary-deep: #0A4867;
+  --brand-primary-tint: #E7F2F8;
+  --brand-primary-soft: #CFE5F0;
+
+  --brand-secondary: #2DA589;
+  --brand-secondary-strong: #1F7F69;
+  --brand-secondary-tint: #E8F6F2;
+  --brand-secondary-light: #7ED3BF;
+
+  --brand-gradient: linear-gradient(135deg, #1172A3 0%, #2DA589 100%);
+  --brand-gradient-soft: linear-gradient(135deg, #E7F2F8 0%, #E8F6F2 100%);
+  /* Dark brand ground for navigation rails and sign-in stages. */
+  --brand-rail: linear-gradient(180deg, #0F6593 0%, #0B4F72 100%);
+  --brand-stage: linear-gradient(150deg, #0A4867 0%, #0F6593 52%, #1D8A86 100%);
+  --brand-focus-ring: 0 0 0 3px rgba(17, 114, 163, 0.28);
+}

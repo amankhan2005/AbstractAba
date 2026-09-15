@@ -1,0 +1,59 @@
+@import 'tailwindcss';
+
+/**
+ * Platform Console — base layer.
+ *
+ * Only the foundation lives here: the font stack, the LOCKED clinical state
+ * colours shared with the product (Blueprint 6.14b `state.*`), reduced-motion
+ * guarantees and document defaults. Every console component, page and dialog
+ * is styled by the single design system in `redesign.css`, which loads after
+ * this file.
+ */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --color-state-approved: #3b6d11;
+  --color-state-approved-surface: #eaf3de;
+  --color-state-pending: #854f0b;
+  --color-state-pending-surface: #faeeda;
+  --color-state-denied: #a32d2d;
+  --color-state-denied-surface: #fcebeb;
+  --color-state-info: #185fa5;
+  --color-state-info-surface: #e6f1fb;
+  --color-state-draft: #5f5e5a;
+  --color-state-draft-surface: #f1efe8;
+}
+
+/** Reduced motion is an accessibility guarantee, not a preference. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Forced reduced motion, independent of the OS setting. */
+:root[data-motion='reduced'] *,
+:root[data-motion='reduced'] *::before,
+:root[data-motion='reduced'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
